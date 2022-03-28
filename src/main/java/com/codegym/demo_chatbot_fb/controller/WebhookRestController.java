@@ -63,11 +63,12 @@ public class WebhookRestController {
     @PostMapping("/webhook")
     public ResponseEntity<Void> handleCallback(@RequestBody final String payload, @RequestHeader(SIGNATURE_HEADER_NAME) final String signature) throws MessengerVerificationException {
         this.messenger.onReceiveEvents(payload, of(signature), event -> {
+            logger.info("ABC " +event.senderId() + " ");
             if (event.isTextMessageEvent()) {
                 try {
-                    logger.info("0");
+                    logger.info("QuyTD: 0");
                     handleTextMessageEvent(event.asTextMessageEvent());
-                    logger.info("1");
+                    logger.info("QuyTD: 1");
                 } catch (MessengerApiException e) {
                     logger.info("2");
                     e.printStackTrace();
