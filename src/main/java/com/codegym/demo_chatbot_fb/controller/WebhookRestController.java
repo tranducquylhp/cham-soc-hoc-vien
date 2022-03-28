@@ -125,7 +125,7 @@ public class WebhookRestController {
         }
     }
 
-    @Scheduled(cron = "0 */1 * * * *", zone = "Asia/Saigon")
+//    @Scheduled(cron = "0 */1 * * * *", zone = "Asia/Saigon")
     private void sendTextMessage() {
         CodeExercise codeExercise = codeExerciseService.findCodeExerciseTrueFirst();
         ArrayList<User> users = (ArrayList<User>) userService.findAllByStatusIsTrue();
