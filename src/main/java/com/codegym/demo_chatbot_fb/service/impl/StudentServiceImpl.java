@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
@@ -31,12 +34,22 @@ public class StudentServiceImpl implements StudentService {
         || student.getMonthRegister() == null) return "Bạn chưa điền các thông tin bắt buộc";
         if (student.getId() == null) {
             student.setStatus(true);
+            student.setCreateDate(new Date());
+        } else {
+            Student studentDb = studentRepository.findById(student.getId()).orElse(null);
+            if (studentDb == null) return "Thông tin học viên không tồn tại";
+            student.setCreateDate(studentDb.getCreateDate());
+            student.setStatus(studentDb.isStatus());
         }
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c = Calendar.getInstance();
-        c.setTime(student.getDateRegister());
+        try {
+            c.setTime(df.parse(student.getDateRegister()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         c.add(Calendar.MONTH, 1);
-        student.setDateExpired(c.getTime());
-        student.setCreateDate(new Date());
+        student.setDateExpired(df.format(c.getTime()));
         studentRepository.save(student);
         return "";
     }
@@ -47,6 +60,7 @@ public class StudentServiceImpl implements StudentService {
         if (student != null) {
             student.setStatus(false);
         }
+        studentRepository.save(student);
     }
 
     @Override
@@ -56,6 +70,6 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Iterable<Student> searchStudentByPhoneNumber(String phoneNumber) {
-        return null;
+        return studentRepository.findAllByPhoneNumberContaining(phoneNumber);
     }
 }

@@ -2,10 +2,6 @@ package com.codegym.demo_chatbot_fb.controller;
 
 import static com.github.messenger4j.Messenger.SIGNATURE_HEADER_NAME;
 
-import com.codegym.demo_chatbot_fb.model.CodeExercise;
-import com.codegym.demo_chatbot_fb.model.User;
-import com.codegym.demo_chatbot_fb.service.CodeExerciseService;
-import com.codegym.demo_chatbot_fb.service.UserService;
 import com.github.messenger4j.Messenger;
 import com.github.messenger4j.exception.MessengerApiException;
 import com.github.messenger4j.exception.MessengerIOException;
@@ -22,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
@@ -35,11 +30,6 @@ import static java.util.Optional.of;
 
 @RestController
 public class WebhookRestController {
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private CodeExerciseService codeExerciseService;
 
     private static Boolean status = true;
 
@@ -85,29 +75,7 @@ public class WebhookRestController {
     }
 
     private void handleTextMessageEvent(TextMessageEvent event) throws MessengerApiException, MessengerIOException {
-        final String messageId = event.messageId();
-        final String messageText = event.text();
-        final String senderId = event.senderId();
-        final Instant timestamp = event.timestamp();
-        if (userService.findById(senderId).isPresent()){
-            Optional<User> user = userService.findById(senderId);
-            if (messageText.toLowerCase().equals("stop")) {
-                sendTextMessageUser(senderId, "Bạn đã dừng nhận bài tập định kỳ. Hãy chat bất kỳ một ký tự nào đó để được bắt đầu nhận bài tập nhé!");
-                user.get().setStatus(false);
-            } else {
-                if (!user.get().isStatus()) {
-                    user.get().setStatus(true);
-                    sendTextMessageUser(senderId, "Xin chào. Bạn đã đăng ký nhận bài tập định kỳ thành công.");
-                } else {
-                    sendTextMessageUser(senderId, "Xin chào. Bạn đã đăng ký nhận bài tập định kỳ trước đó. \n Hãy đợi đến lúc chúng tôi gửi bài tập cho bạn.");
-                }
-            }
-            userService.save(user.get());
-        } else {
-            User user = new User(senderId,true);
-            userService.save(user);
-            sendTextMessageUser(senderId, "Chào mừng bạn đã đến với bot gửi bài tập định kỳ. \n Từ giờ bạn sẽ được nhận bài tập theo thời gian định kỳ. \n Chúc bạn học tập vui vẻ.");
-        }
+
     }
 
     private void sendTextMessageUser(String idSender, String text) {
@@ -126,24 +94,24 @@ public class WebhookRestController {
     }
 
 //    @Scheduled(cron = "0 */1 * * * *", zone = "Asia/Saigon")
-    private void sendTextMessage() {
-        CodeExercise codeExercise = codeExerciseService.findCodeExerciseTrueFirst();
-        ArrayList<User> users = (ArrayList<User>) userService.findAllByStatusIsTrue();
-        if (codeExercise != null) {
-            status = true;
-            for (int i = 0; i < users.size(); i++) {
-                sendTextMessageUser(users.get(i).getId(),
-                        LocalDate.now() + "\n" + codeExercise.getTitle() + "\n" + codeExercise.getContent());
-            }
-            codeExercise.setStatus(false);
-            codeExerciseService.save(codeExercise);
-        } else if (status){
-            for (int i = 0; i < users.size(); i++) {
-                sendTextMessageUser(users.get(i).getId(),"Hiện tại đã hết bài tập để rèn luyện. Hãy đợi admin cập nhật bài tập mới!");
-                status = false;
-            }
-        }
-    }
+//    private void sendTextMessage() {
+//        CodeExercise codeExercise = codeExerciseService.findCodeExerciseTrueFirst();
+//        ArrayList<User> users = (ArrayList<User>) userService.findAllByStatusIsTrue();
+//        if (codeExercise != null) {
+//            status = true;
+//            for (int i = 0; i < users.size(); i++) {
+//                sendTextMessageUser(users.get(i).getId(),
+//                        LocalDate.now() + "\n" + codeExercise.getTitle() + "\n" + codeExercise.getContent());
+//            }
+//            codeExercise.setStatus(false);
+//            codeExerciseService.save(codeExercise);
+//        } else if (status){
+//            for (int i = 0; i < users.size(); i++) {
+//                sendTextMessageUser(users.get(i).getId(),"Hiện tại đã hết bài tập để rèn luyện. Hãy đợi admin cập nhật bài tập mới!");
+//                status = false;
+//            }
+//        }
+//    }
 
     private void handleSendException(Exception e) {
         logger.error("Message could not be sent. An unexpected error occurred.", e);

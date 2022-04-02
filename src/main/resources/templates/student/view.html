@@ -2,16 +2,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Code Exercise View</title>
+    <title>Thông tin chi tiết học sinh</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<p>
+<h1>
     <a href="/students">Quay về danh sách học sinh</a>
-</p>
-<h1>Thôn tin chi tiết học sinh</h1>
+</h1>
+<h1>Thông tin chi tiết học sinh</h1>
 <form th:object="${student}">
     <input th:type="hidden" name="id" th:field="*{id}">
     <table>

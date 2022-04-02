@@ -2,16 +2,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Code Exercise</title>
+    <title>Cập nhật thông tin học sinh</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h1>Tạo mới học sinh</h1>
 <h1>
     <a href="/students">Quay về danh sách học sinh</a>
 </h1>
+<h1>Tạo mới học sinh</h1>
 <h3 style="color: red">
     <th:block th:if="${message}">
         <p th:text="${message}"></p>
@@ -38,7 +38,7 @@
         </tr>
         <tr>
             <td>Ngày đăng ký <span style="color: red">*</span> : </td>
-            <td><input type="text" th:field="*{dateRegister}" style="width: 100%"/></td>
+            <td><input type="date" th:field="*{dateRegister}" style="width: 100%"/></td>
         </tr>
         <tr>
             <td>Số tháng <span style="color: red">*</span> : </td>

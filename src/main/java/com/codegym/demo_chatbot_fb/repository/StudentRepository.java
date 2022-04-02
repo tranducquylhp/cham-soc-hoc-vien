@@ -1,6 +1,5 @@
 package com.codegym.demo_chatbot_fb.repository;
 
-import com.codegym.demo_chatbot_fb.model.CodeExercise;
 import com.codegym.demo_chatbot_fb.model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

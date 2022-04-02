@@ -18,9 +18,9 @@ public class Student {
     private String name;
     private String phoneNumber;
     private String parentPhoneNumber;
-    private Date dateRegister;
+    private String dateRegister;
     private Long monthRegister;
-    private Date dateExpired;
+    private String dateExpired;
     private Long classNumber;
     private String schedule;
     private Date createDate;
@@ -65,11 +65,11 @@ public class Student {
         this.parentPhoneNumber = parentPhoneNumber;
     }
 
-    public Date getDateRegister() {
+    public String getDateRegister() {
         return dateRegister;
     }
 
-    public void setDateRegister(Date dateRegister) {
+    public void setDateRegister(String dateRegister) {
         this.dateRegister = dateRegister;
     }
 
@@ -81,11 +81,11 @@ public class Student {
         this.monthRegister = monthRegister;
     }
 
-    public Date getDateExpired() {
+    public String getDateExpired() {
         return dateExpired;
     }
 
-    public void setDateExpired(Date dateExpired) {
+    public void setDateExpired(String dateExpired) {
         this.dateExpired = dateExpired;
     }
 

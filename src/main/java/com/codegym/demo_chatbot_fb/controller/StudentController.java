@@ -18,9 +18,9 @@ public class StudentController {
     private StudentService studentService;
 
     @GetMapping()
-    public ModelAndView codeList(@RequestParam("s") Optional<String> s, HttpServletRequest request){
+    public ModelAndView studetList(@RequestParam("s") Optional<String> s, HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView("student/list");
-        if (s.isPresent()){
+        if (s.isPresent() && StringUtils.hasText(s.get())){
             modelAndView.addObject("students", studentService.searchStudentByPhoneNumber(s.get()));
         } else modelAndView.addObject("students", studentService.findAll());
         if (request.getParameter("message")!= null){
@@ -39,7 +39,7 @@ public class StudentController {
     }
 
     @PostMapping("/create")
-    public ModelAndView create(@ModelAttribute Student student){
+    public ModelAndView create(@ModelAttribute(name = "student") Student student){
         String message = studentService.save(student);
         ModelAndView modelAndView;
         if (StringUtils.hasText(message)) {
@@ -103,7 +103,7 @@ public class StudentController {
         return modelAndView;
     }
 
-    @GetMapping("/codeExercise/view/{id}")
+    @GetMapping("/view/{id}")
     public ModelAndView view(@PathVariable Long id){
         ModelAndView modelAndView = new ModelAndView("student/view");
         Optional<Student> studentOptional = studentService.findById(id);

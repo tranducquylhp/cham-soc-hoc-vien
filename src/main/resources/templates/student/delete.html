@@ -2,14 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Delete Code Exercise</title>
+    <title>Xoá học sinh</title>
 </head>
 <body>
+<h1>
+    <a href="/students">Quay về danh sách học sinh</a>
+</h1>
 <h1>Xoá thông tin học sinh</h1>
 <h2>Bạn chắc chắn muốn xoá?</h2>
-<p>
-    <a href="/students">Quay về danh sách học sinh</a>
-</p>
 <form th:action="@{/students/delete/__${student.id}__}" th:object="${student}" method="post">
     <input th:type="hidden" name="id" th:field="*{id}">
     <table>

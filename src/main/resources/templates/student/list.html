@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Code Exercise list</title>
+    <title>Danh sách học sinh</title>
     <style>
         th, td {
             text-align: center !important;
@@ -48,9 +48,9 @@
                 <td th:text="${student.dateRegister}"></td>
                 <td th:text="${student.monthRegister}"></td>
                 <td th:text="${student.dateExpired}"></td>
-                <td><a th:href="@{/codeExercise/view/__${code.id}__ }">Xem chi tiết</a></td>
-                <td><a th:href="@{/codeExercise/edit/__${code.id}__ }">Sửa</a></td>
-                <td><a th:href="@{/codeExercise/delete/__${code.id}__ }">Xoá</a></td>
+                <td><a th:href="@{/students/view/__${student.id}__ }">Xem chi tiết</a></td>
+                <td><a th:href="@{/students/edit/__${student.id}__ }">Sửa</a></td>
+                <td><a th:href="@{/students/delete/__${student.id}__ }">Xoá</a></td>
             </tr>
         </th:block>
     </table>
