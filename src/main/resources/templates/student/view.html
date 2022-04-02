@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Code Exercise View</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<p>
+    <a href="/students">Quay về danh sách học sinh</a>
+</p>
+<h1>Code Exercise view</h1>
+<form th:object="${student}">
+    <input th:type="hidden" name="id" th:field="*{id}">
+    <table>
+        <tr>
+            <td>Tên học sinh:</td>
+            <td th:text="*{name}"></td>
+        </tr>
+        <tr>
+            <td>SĐT: </td>
+            <td th:text="*{phoneNumber}"></td>
+        </tr>
+        <tr>
+            <td>SĐT phụ huynh: </td>
+            <td th:text="*{parentPhoneNumber}"></td>
+        </tr>
+        <tr>
+            <td>Lớp: </td>
+            <td th:text="*{classNumber}"></td>
+        </tr>
+        <tr>
+            <td>Ngày đăng ký: </td>
+            <td th:text="*{dateRegister}"></td>
+        </tr>
+        <tr>
+            <td>Số tháng: </td>
+            <td th:text="*{monthRegister}"></td>
+        </tr>
+        <tr>
+            <td>Ngày hết hạn: </td>
+            <td th:text="*{dateExpired}"></td>
+        </tr>
+        <tr>
+            <td>Lịch học: </td>
+            <td th:text="*{schedule}"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

@@ -7,4 +7,8 @@ public interface CodeExerciseService extends GeneralService<CodeExercise, Long> 
     Iterable<CodeExercise> findAllByTitleContaining(String s);
 
     CodeExercise findCodeExerciseTrueFirst();
+
+    Iterable<CodeExercise> findAllByStatusIsTrue();
+
+    Iterable<CodeExercise> findAllByStatusIsFalse();
 }

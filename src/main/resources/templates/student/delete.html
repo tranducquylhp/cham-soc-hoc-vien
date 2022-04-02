@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Code Exercise</title>
+</head>
+<body>
+<h1>Xoá thông tin học sinh</h1>
+<h2>Bạn chắc chắn muốn xoá?</h2>
+<p>
+    <a href="/students">Quay về danh sách học sinh</a>
+</p>
+<form th:action="@{/student/delete/__${student.id}__}" th:object="${student}" method="post">
+    <input th:type="hidden" name="id" th:field="*{id}">
+    <table>
+        <tr>
+            <td>Tên học sinh:</td>
+            <td th:text="*{name}"></td>
+        </tr>
+        <tr>
+            <td>SĐT: </td>
+            <td th:text="*{phoneNumber}"></td>
+        </tr>
+        <tr>
+            <td>SĐT phụ huynh: </td>
+            <td th:text="*{parentPhoneNumber}"></td>
+        </tr>
+        <tr>
+            <td>Lớp: </td>
+            <td th:text="*{classNumber}"></td>
+        </tr>
+        <tr>
+            <td>Ngày đăng ký: </td>
+            <td th:text="*{dateRegister}"></td>
+        </tr>
+        <tr>
+            <td>Số tháng: </td>
+            <td th:text="*{monthRegister}"></td>
+        </tr>
+        <tr>
+            <td>Ngày hết hạn: </td>
+            <td th:text="*{dateExpired}"></td>
+        </tr>
+        <tr>
+            <td>Lịch học: </td>
+            <td th:text="*{schedule}"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Xoá học sinh"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

@@ -10,8 +10,4 @@ public interface GeneralService<T, E> {
     void delete(E id);
 
     Optional<T> findById(E id);
-
-    Iterable<T> findAllByStatusIsTrue();
-
-    Iterable<T> findAllByStatusIsFalse();
 }

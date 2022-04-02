@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Code Exercise</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h1>Tạo mới học sinh</h1>
+<h1>
+    <a href="/students">Quay về danh sách học sinh</a>
+</h1>
+
+<form th:action="@{/student/create}" th:object="${student}" method="post" style="width: 100%">
+    <table style="width: 100%" class="table table-striped">
+        <tr>
+            <td>Tên học sinh <span style="color: red">*</span> :</td>
+            <td><input type="text" th:field="*{name}" style="width: 100%"/></td>
+        </tr>
+        <tr>
+            <td>SĐT <span style="color: red">*</span> : </td>
+            <td><input type="text" th:field="*{phoneNumber}" style="width: 100%"/></td>
+        </tr>
+        <tr>
+            <td>SĐT phụ huynh : </td>
+            <td><input type="text" th:field="*{parentPhoneNumber}" style="width: 100%"/></td>
+        </tr>
+        <tr>
+            <td>Lớp <span style="color: red">*</span> : </td>
+            <td><input type="text" th:field="*{classNumber}" style="width: 100%"/></td>
+        </tr>
+        <tr>
+            <td>Ngày đăng ký <span style="color: red">*</span> : </td>
+            <td><input type="text" th:field="*{dateRegister}" style="width: 100%"/></td>
+        </tr>
+        <tr>
+            <td>Số tháng <span style="color: red">*</span> : </td>
+            <td><input type="text" th:field="*{monthRegister}" style="width: 100%"/></td>
+        </tr>
+        <tr>
+            <td>Lịch học <span style="color: red">*</span> : </td>
+            <td><input type="text" th:field="*{schedule}" style="width: 100%"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Tạo mới học sinh"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

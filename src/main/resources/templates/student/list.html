@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Code Exercise list</title>
+    <style>
+        th, td {
+            text-align: center !important;
+        }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h1 style="color: red">
+    <th:block th:if="${message}">
+        <p th:text="${message}"></p>
+    </th:block>
+</h1>
+<h3><a href="/student/create"><button>Tạo mới học sinh</button></a> </h3>
+<div class="tab-pane fade" id="pills-code" role="tabpanel" aria-labelledby="pills-code-tab">
+    <h1>Danh sách học sinh</h1>
+    <form>
+        Tìm kiếm theo SĐT:
+        <input name="s" type="text"/>
+        <input type="submit" value="Search"/>
+    </form>
+    <table border="1" class="table table-striped">
+        <tr>
+            <th>STT</th>
+            <th>Họ tên</th>
+            <th>SĐT</th>
+            <th>Lớp</th>
+            <th>Ngày đăng ký</th>
+            <th>Số tháng</th>
+            <th>Ngày hết hạn</th>
+            <th>Xem chi tiết</th>
+            <th>Sửa</th>
+            <th>Xoá</th>
+        </tr>
+        <th:block th:each="student, state : ${students}">
+            <tr>
+                <td th:text="${state.count}"></td>
+                <td th:text="${student.name}"></td>
+                <td th:text="${student.phoneNumber}"></td>
+                <td th:text="${student.classNumber}"></td>
+                <td th:text="${student.dateRegister}"></td>
+                <td th:text="${student.monthRegister}"></td>
+                <td th:text="${student.dateExpired}"></td>
+                <td><a th:href="@{/codeExercise/view/__${code.id}__ }">Xem chi tiết</a></td>
+                <td><a th:href="@{/codeExercise/edit/__${code.id}__ }">Sửa</a></td>
+                <td><a th:href="@{/codeExercise/delete/__${code.id}__ }">Xoá</a></td>
+            </tr>
+        </th:block>
+    </table>
+</div>
+</body>
+</html>
