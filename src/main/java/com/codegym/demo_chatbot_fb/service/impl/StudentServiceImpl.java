@@ -70,6 +70,6 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Iterable<Student> searchStudentByPhoneNumber(String phoneNumber) {
-        return studentRepository.findAllByPhoneNumberContaining(phoneNumber);
+        return studentRepository.findAllByPhoneNumberContainingAndStatus(phoneNumber, true);
     }
 }
