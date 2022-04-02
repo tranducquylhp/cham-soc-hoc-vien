@@ -48,7 +48,7 @@ public class StudentServiceImpl implements StudentService {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        c.add(Calendar.MONTH, student.getMonthRegister());
+        c.add(Calendar.MONTH, student.getMonthRegister().intValue());
         student.setDateExpired(df.format(c.getTime()));
         studentRepository.save(student);
         return "";
