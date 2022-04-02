@@ -56,14 +56,10 @@ public class WebhookRestController {
             logger.info("ABC " +event.senderId() + " ");
             if (event.isTextMessageEvent()) {
                 try {
-                    logger.info("QuyTD: 0");
                     handleTextMessageEvent(event.asTextMessageEvent());
-                    logger.info("QuyTD: 1");
                 } catch (MessengerApiException e) {
-                    logger.info("2");
                     e.printStackTrace();
                 } catch (MessengerIOException e) {
-                    logger.info("3");
                     e.printStackTrace();
                 }
             } else {
