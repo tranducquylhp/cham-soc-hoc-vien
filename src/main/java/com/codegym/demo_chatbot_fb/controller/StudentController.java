@@ -45,6 +45,7 @@ public class StudentController {
         if (StringUtils.hasText(message)) {
             modelAndView = new ModelAndView("student/create");
             modelAndView.addObject("message", message);
+            modelAndView.addObject("student", student);
         } else {
             modelAndView = new ModelAndView("redirect:/students");
             modelAndView.addObject("message", "Create done");
@@ -72,6 +73,7 @@ public class StudentController {
         if (StringUtils.hasText(message)) {
             modelAndView = new ModelAndView("student/edit/" + id);
             modelAndView.addObject("message", message);
+            modelAndView.addObject("student", student);
         } else {
             modelAndView = new ModelAndView("redirect:/students");
             modelAndView.addObject("message", "Sửa thông tin thành công");

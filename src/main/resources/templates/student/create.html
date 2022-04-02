@@ -12,7 +12,11 @@
 <h1>
     <a href="/students">Quay về danh sách học sinh</a>
 </h1>
-
+<h3 style="color: red">
+    <th:block th:if="${message}">
+        <p th:text="${message}"></p>
+    </th:block>
+</h3>
 <form th:action="@{/students/create}" th:object="${student}" method="post" style="width: 100%">
     <table style="width: 100%" class="table table-striped">
         <tr>
