@@ -13,7 +13,7 @@
     <a href="/students">Quay về danh sách học sinh</a>
 </h1>
 
-<form th:action="@{/student/edit/__${student.id}__}" th:object="${student}" method="post" style="width: 100%">
+<form th:action="@{/students/edit/__${student.id}__}" th:object="${student}" method="post" style="width: 100%">
     <input th:type="hidden" name="id" th:field="*{id}">
     <table style="width: 100%" class="table table-striped">
         <tr>
