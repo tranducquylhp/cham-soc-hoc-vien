@@ -102,7 +102,7 @@ public class WebhookRestController {
         }
     }
 
-    @Scheduled(cron = "0 5 21 * * *", zone = "Asia/Saigon")
+    @Scheduled(cron = "0 10 21 * * *", zone = "Asia/Saigon")
     private void sendTextMessage() {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Calendar now = Calendar.getInstance();
@@ -118,6 +118,7 @@ public class WebhookRestController {
                 Calendar c = Calendar.getInstance();
                 c.setTime(date);
                 c.add(Calendar.DATE, paramConfig.getValue().intValue() * 7);
+                c.setTimeZone(TimeZone.getTimeZone("Asia/Saigon"));
                 List<Student> students = studentService.getAllStudentExpired(df.format(c.getTime()));
                 if (students != null && !students.isEmpty()) {
                     for (int i=0 ; i< students.size(); i++) {
@@ -125,7 +126,6 @@ public class WebhookRestController {
                         text += (i+1) + ". " + student.getName() + " | " + student.getPhoneNumber() + "\n";
                     }
                     isSend = true;
-                    c.setTimeZone(TimeZone.getTimeZone("Asia/Saigon"));
                     text = "Danh sách học sinh hết hạn sau " + paramConfig.getValue() + " tuần nữa vào ngày " + df.format(c.getTime()) + "\n";
                     sendTextMessageUser("5045284095540695",
                             text);
