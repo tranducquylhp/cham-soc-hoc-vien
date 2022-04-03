@@ -31,15 +31,15 @@
             <th>Sửa</th>
             <th>Xoá</th>
         </tr>
-        <th:block th:each="param, state : ${params}">
+        <th:block th:each="paramObj, state : ${params}">
             <tr>
                 <td th:text="${state.count}"></td>
-                <td th:text="${param.name}"></td>
-                <td th:text="${param.value}"></td>
-                <td th:text="${param.description}"></td>
-                <td><a th:href="@{/params/view/__${param.id}__ }">Xem chi tiết</a></td>
-                <td><a th:href="@{/params/edit/__${param.id}__ }">Sửa</a></td>
-                <td><a th:href="@{/params/delete/__${param.id}__ }">Xoá</a></td>
+                <td th:text="${paramObj.name}"></td>
+                <td th:text="${paramObj.value}"></td>
+                <td th:text="${paramObj.description}"></td>
+                <td><a th:href="@{/params/view/__${paramObj.id}__ }">Xem chi tiết</a></td>
+                <td><a th:href="@{/params/edit/__${paramObj.id}__ }">Sửa</a></td>
+                <td><a th:href="@{/params/delete/__${paramObj.id}__ }">Xoá</a></td>
             </tr>
         </th:block>
     </table>
