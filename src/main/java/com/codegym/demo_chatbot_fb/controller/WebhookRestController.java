@@ -112,14 +112,14 @@ public class WebhookRestController {
         sendTextMessageUser("5045284095540695","Hệ thống gửi bạn thông tin ngày: " + df.format(now.getTime()));
         List<ParamConfig> paramConfigList = paramConfigService.findAll();
         boolean isSend = false;
-        if (paramConfigList != null || !paramConfigList.isEmpty()) {
+        if (paramConfigList != null && !paramConfigList.isEmpty()) {
             for (ParamConfig paramConfig : paramConfigList) {
                 String text = "";
                 Calendar c = Calendar.getInstance();
                 c.setTime(date);
                 c.add(Calendar.DATE, paramConfig.getValue().intValue() * 7);
                 List<Student> students = studentService.getAllStudentExpired(df.format(c.getTime()));
-                if (students != null || !students.isEmpty()) {
+                if (students != null && !students.isEmpty()) {
                     for (int i=0 ; i< students.size(); i++) {
                         Student student = students.get(i);
                         text += (i+1) + ". " + student.getName() + " | " + student.getPhoneNumber() + "\n";
