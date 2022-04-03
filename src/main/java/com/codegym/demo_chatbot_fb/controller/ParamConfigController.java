@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -20,7 +21,8 @@ public class ParamConfigController {
     @GetMapping()
     public ModelAndView paramList(HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView("param/list");
-        modelAndView.addObject("params", paramService.findAll());
+        List<ParamConfig> paramConfigList = paramService.findAll();
+        modelAndView.addObject("params", paramConfigList);
         if (request.getParameter("message")!= null){
             modelAndView.addObject("message",request.getParameter("message"));
         }

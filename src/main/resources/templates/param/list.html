@@ -34,7 +34,7 @@
         <th:block th:each="param, state : ${params}">
             <tr>
                 <td th:text="${state.count}"></td>
-                <td ></td>
+                <td th:text="${param.name}"></td>
                 <td th:text="${param.value}"></td>
                 <td th:text="${param.description}"></td>
                 <td><a th:href="@{/params/view/__${param.id}__ }">Xem chi tiết</a></td>
