@@ -109,7 +109,7 @@ public class WebhookRestController {
         Date date = new Date();
         now.setTime(date);
         now.setTimeZone(TimeZone.getTimeZone("Asia/Saigon"));
-        sendTextMessageUser("5045284095540695","Hệ thống gửi bạn thông tin ngày: " + now.format(date));
+        sendTextMessageUser("5045284095540695","Hệ thống gửi bạn thông tin ngày: " + df.format(now.getTime()));
         List<ParamConfig> paramConfigList = paramConfigService.findAll();
         boolean isSend = false;
         if (paramConfigList != null || !paramConfigList.isEmpty()) {
