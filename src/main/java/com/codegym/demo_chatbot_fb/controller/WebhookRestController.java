@@ -102,13 +102,16 @@ public class WebhookRestController {
         }
     }
 
-    @Scheduled(cron = "0 40 20 * * *", zone = "Asia/Saigon")
+    @Scheduled(cron = "0 55 20 * * *", zone = "Asia/Saigon")
     private void sendTextMessage() {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar now = Calendar.getInstance();
         Date date = new Date();
-        sendTextMessageUser("5045284095540695","Hệ thống gửi bạn thông tin ngày: " + date);
+        now.setTime(date);
+        now.setTimeZone(TimeZone.getTimeZone("Asia/Saigon"));
+        sendTextMessageUser("5045284095540695","Hệ thống gửi bạn thông tin ngày: " + now.format(date));
         List<ParamConfig> paramConfigList = paramConfigService.findAll();
         boolean isSend = false;
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         if (paramConfigList != null || !paramConfigList.isEmpty()) {
             for (ParamConfig paramConfig : paramConfigList) {
                 String text = "";
