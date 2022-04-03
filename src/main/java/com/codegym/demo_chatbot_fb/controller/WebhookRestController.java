@@ -102,7 +102,7 @@ public class WebhookRestController {
         }
     }
 
-    @Scheduled(cron = "0 55 20 * * *", zone = "Asia/Saigon")
+    @Scheduled(cron = "0 0 21 * * *", zone = "Asia/Saigon")
     private void sendTextMessage() {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Calendar now = Calendar.getInstance();
