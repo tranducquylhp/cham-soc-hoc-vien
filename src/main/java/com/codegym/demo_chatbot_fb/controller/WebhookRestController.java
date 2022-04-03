@@ -114,7 +114,7 @@ public class WebhookRestController {
                 String text = "";
                 Calendar c = Calendar.getInstance();
                 c.setTime(date);
-                c.add(Calendar.MONTH, paramConfig.getValue().intValue());
+                c.add(Calendar.DATE, paramConfig.getValue().intValue() * 7);
                 List<Student> students = studentService.getAllStudentExpired(df.format(c.getTime()));
                 if (students != null || !students.isEmpty()) {
                     for (int i=0 ; i< students.size(); i++) {
