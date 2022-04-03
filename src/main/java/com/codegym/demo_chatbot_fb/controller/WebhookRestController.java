@@ -102,7 +102,7 @@ public class WebhookRestController {
         }
     }
 
-    @Scheduled(cron = "0 15 21 * * *", zone = "Asia/Saigon")
+    @Scheduled(cron = "0 20 21 * * *", zone = "Asia/Saigon")
     private void sendTextMessage() {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Calendar now = Calendar.getInstance();
@@ -126,7 +126,7 @@ public class WebhookRestController {
                         text += (i+1) + ". " + student.getName() + " | " + student.getPhoneNumber() + "\n";
                     }
                     isSend = true;
-                    text = "Danh sách học sinh hết hạn sau " + paramConfig.getValue() + " tuần nữa vào ngày " + df.format(c.getTime()) + "\n";
+                    text = "Danh sách học sinh hết hạn sau " + paramConfig.getValue() + " tuần nữa vào ngày " + df.format(c.getTime()) + "\n" + text;
                     sendTextMessageUser("5045284095540695",
                             text);
                 }
