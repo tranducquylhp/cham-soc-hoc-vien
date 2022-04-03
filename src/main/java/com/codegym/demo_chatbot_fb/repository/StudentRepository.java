@@ -13,4 +13,5 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     Iterable<Student> findAllActive();
 
     List<Student> findAllByPhoneNumberContainingAndStatus(String phoneNumber, boolean status);
+    List<Student> findAllByDateExpiredAndStatus(String dateExpired, boolean status);
 }

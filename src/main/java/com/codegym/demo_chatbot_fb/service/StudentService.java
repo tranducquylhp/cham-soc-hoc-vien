@@ -3,6 +3,7 @@ package com.codegym.demo_chatbot_fb.service;
 
 import com.codegym.demo_chatbot_fb.model.Student;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface StudentService{
@@ -12,4 +13,5 @@ public interface StudentService{
 
     Optional<Student> findById(Long id);
     Iterable<Student> searchStudentByPhoneNumber(String phoneNumber);
+    List<Student> getAllStudentExpired(String dateExpired);
 }

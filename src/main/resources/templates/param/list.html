@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách cấu hình</title>
+    <style>
+        th, td {
+            text-align: center !important;
+        }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h3 style="color: blue">
+    <th:block th:if="${message}">
+        <p th:text="${message}"></p>
+    </th:block>
+</h3>
+<h3><a href="/params/create"><button>Tạo mới cấu hình</button></a> </h3>
+<div>
+    <h1>Danh sách học sinh</h1>
+    <table border="1" class="table table-striped">
+        <tr>
+            <th>STT</th>
+            <th>Tên cấu hình</th>
+            <th>Giá trị</th>
+            <th>Mô tả</th>
+            <th>Xem chi tiết</th>
+            <th>Sửa</th>
+            <th>Xoá</th>
+        </tr>
+        <th:block th:each="param, state : ${params}">
+            <tr>
+                <td th:text="${state.count}"></td>
+                <td th:text="${param.name}"></td>
+                <td th:text="${param.value}"></td>
+                <td th:text="${param.description}"></td>
+                <td><a th:href="@{/params/view/__${param.id}__ }">Xem chi tiết</a></td>
+                <td><a th:href="@{/params/edit/__${param.id}__ }">Sửa</a></td>
+                <td><a th:href="@{/params/delete/__${param.id}__ }">Xoá</a></td>
+            </tr>
+        </th:block>
+    </table>
+</div>
+</body>
+</html>

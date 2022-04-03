@@ -2,6 +2,10 @@ package com.codegym.demo_chatbot_fb.controller;
 
 import static com.github.messenger4j.Messenger.SIGNATURE_HEADER_NAME;
 
+import com.codegym.demo_chatbot_fb.model.ParamConfig;
+import com.codegym.demo_chatbot_fb.model.Student;
+import com.codegym.demo_chatbot_fb.service.ParamConfigService;
+import com.codegym.demo_chatbot_fb.service.StudentService;
 import com.github.messenger4j.Messenger;
 import com.github.messenger4j.exception.MessengerApiException;
 import com.github.messenger4j.exception.MessengerIOException;
@@ -18,18 +22,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.*;
 
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 
 @RestController
 public class WebhookRestController {
+
+    @Autowired
+    private StudentService studentService;
+
+    @Autowired
+    private ParamConfigService paramConfigService;
 
     private static Boolean status = true;
 
@@ -89,25 +102,37 @@ public class WebhookRestController {
         }
     }
 
-//    @Scheduled(cron = "0 */1 * * * *", zone = "Asia/Saigon")
-//    private void sendTextMessage() {
-//        CodeExercise codeExercise = codeExerciseService.findCodeExerciseTrueFirst();
-//        ArrayList<User> users = (ArrayList<User>) userService.findAllByStatusIsTrue();
-//        if (codeExercise != null) {
-//            status = true;
-//            for (int i = 0; i < users.size(); i++) {
-//                sendTextMessageUser(users.get(i).getId(),
-//                        LocalDate.now() + "\n" + codeExercise.getTitle() + "\n" + codeExercise.getContent());
-//            }
-//            codeExercise.setStatus(false);
-//            codeExerciseService.save(codeExercise);
-//        } else if (status){
-//            for (int i = 0; i < users.size(); i++) {
-//                sendTextMessageUser(users.get(i).getId(),"Hiện tại đã hết bài tập để rèn luyện. Hãy đợi admin cập nhật bài tập mới!");
-//                status = false;
-//            }
-//        }
-//    }
+    @Scheduled(cron = "0 40 20 * * *", zone = "Asia/Saigon")
+    private void sendTextMessage() {
+        Date date = new Date();
+        sendTextMessageUser("5045284095540695","Hệ thống gửi bạn thông tin ngày: " + date);
+        List<ParamConfig> paramConfigList = paramConfigService.findAll();
+        boolean isSend = false;
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        if (paramConfigList != null || !paramConfigList.isEmpty()) {
+            for (ParamConfig paramConfig : paramConfigList) {
+                String text = "";
+                Calendar c = Calendar.getInstance();
+                c.setTime(date);
+                c.add(Calendar.MONTH, paramConfig.getValue().intValue());
+                List<Student> students = studentService.getAllStudentExpired(df.format(c.getTime()));
+                if (students != null || !students.isEmpty()) {
+                    for (int i=0 ; i< students.size(); i++) {
+                        Student student = students.get(i);
+                        text += (i+1) + ". " + student.getName() + " | " + student.getPhoneNumber() + "\n";
+                    }
+                    isSend = true;
+                    text = "Danh sách học sinh hết hạn sau " + paramConfig.getValue() + " tuần nữa vào ngày " + c.getTime() + "\n";
+                    sendTextMessageUser("5045284095540695",
+                            text);
+                }
+            }
+        }
+
+        if (!isSend) {
+            sendTextMessageUser("5045284095540695", "Không có học sinh sẽ hết hạn trong các tuần được cấu hình");
+        }
+    }
 
     private void handleSendException(Exception e) {
         logger.error("Message could not be sent. An unexpected error occurred.", e);

@@ -12,6 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -71,5 +72,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Iterable<Student> searchStudentByPhoneNumber(String phoneNumber) {
         return studentRepository.findAllByPhoneNumberContainingAndStatus(phoneNumber, true);
+    }
+
+    @Override
+    public List<Student> getAllStudentExpired(String dateExpired) {
+        return studentRepository.findAllByDateExpiredAndStatus(dateExpired, true);
     }
 }

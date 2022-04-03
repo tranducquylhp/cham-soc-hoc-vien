@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cập nhật thông tin cấu hình</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h1>
+    <a href="/params">Quay về danh sách cấu hình</a>
+</h1>
+<h1>Cập nhật thông tin cấu hình</h1>
+<h3 style="color: red">
+    <th:block th:if="${message}">
+        <p th:text="${message}"></p>
+    </th:block>
+</h3>
+<form th:action="@{/params/edit/__${paramConfig.id}__}" th:object="${paramConfig}" method="post" style="width: 100%">
+    <table style="width: 100%" class="table table-striped">
+        <input th:type="hidden" name="id" th:field="*{id}">
+        <tr>
+            <td>Tên cấu hình <span style="color: red">*</span> :</td>
+            <td><input type="text" th:field="*{name}" style="width: 100%"/></td>
+        </tr>
+        <tr>
+            <td>Giá trị <span style="color: red">*</span> : </td>
+            <td><input type="number" th:field="*{value}" style="width: 100%"/></td>
+        </tr>
+        <tr>
+            <td>Mô tả : </td>
+            <td><input type="text" th:field="*{description}" style="width: 100%"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Cập nhật thông tin"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

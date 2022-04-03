@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thông tin chi tiết cấu hình</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h1>
+    <a href="/params">Quay về danh sách cấu hình</a>
+</h1>
+<h1>Thông tin chi tiết cấu hình</h1>
+<form th:object="${paramConfig}">
+    <input th:type="hidden" name="id" th:field="*{id}">
+    <table>
+        <tr>
+            <td>Tên cấu hình:</td>
+            <td th:text="*{name}"></td>
+        </tr>
+        <tr>
+            <td>Giá trị: </td>
+            <td th:text="*{value}"></td>
+        </tr>
+        <tr>
+            <td>Mô tả: </td>
+            <td th:text="*{description}"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

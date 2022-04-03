@@ -18,7 +18,7 @@ public class StudentController {
     private StudentService studentService;
 
     @GetMapping()
-    public ModelAndView studetList(@RequestParam("s") Optional<String> s, HttpServletRequest request){
+    public ModelAndView studentList(@RequestParam("s") Optional<String> s, HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView("student/list");
         if (s.isPresent() && StringUtils.hasText(s.get())){
             modelAndView.addObject("students", studentService.searchStudentByPhoneNumber(s.get()));

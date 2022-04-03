@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Xoá cấu hình</title>
+</head>
+<body>
+<h1>
+    <a href="/params">Quay về danh sách cấu hình</a>
+</h1>
+<h1>Xoá thông tin cấu hình</h1>
+<h2>Bạn chắc chắn muốn xoá?</h2>
+<form th:action="@{/params/delete/__${paramConfig.id}__}" th:object="${paramConfig}" method="post">
+    <input th:type="hidden" name="id" th:field="*{id}">
+    <table>
+        <tr>
+            <td>Tên cấu hình:</td>
+            <td th:text="*{name}"></td>
+        </tr>
+        <tr>
+            <td>Giá trị: </td>
+            <td th:text="*{value}"></td>
+        </tr>
+        <tr>
+            <td>Mô tả : </td>
+            <td th:text="*{description}"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Xoá cấu hình"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
