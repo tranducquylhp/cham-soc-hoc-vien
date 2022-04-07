@@ -24,7 +24,6 @@ public class ParamConfigServiceImpl implements ParamConfigService {
     @Override
     public String save(ParamConfig t) {
         if (!StringUtils.hasText(t.getName())
-                || !StringUtils.hasText(t.getDescription())
                 || t.getValue() == null) return "Bạn chưa điền các thông tin bắt buộc";
         paramConfigRepository.save(t);
         return "";

@@ -29,7 +29,6 @@ public class StudentServiceImpl implements StudentService {
     public String save(Student student) {
         if (!StringUtils.hasText(student.getName())
         || !StringUtils.hasText(student.getPhoneNumber())
-        || !StringUtils.hasText(student.getSchedule())
         || student.getDateRegister() == null
         || student.getClassNumber() == null
         || student.getMonthRegister() == null) return "Bạn chưa điền các thông tin bắt buộc";
