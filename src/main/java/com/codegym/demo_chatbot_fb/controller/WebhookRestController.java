@@ -102,8 +102,9 @@ public class WebhookRestController {
         }
     }
 
-    @Scheduled(cron = "0 0 8 * * *", zone = "Asia/Saigon")
+    @Scheduled(cron = "0 0 23 * * *", zone = "Asia/Saigon")
     private void sendTextMessage() {
+        logger.info("------------ Start process ---------");
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Calendar now = Calendar.getInstance();
         Date date = new Date();
@@ -136,6 +137,7 @@ public class WebhookRestController {
         if (!isSend) {
             sendTextMessageUser("5045284095540695", "Không có học sinh sẽ hết hạn trong các tuần được cấu hình");
         }
+        logger.info("------------ End process ---------");
     }
 
     private void handleSendException(Exception e) {
