@@ -102,7 +102,7 @@ public class WebhookRestController {
         }
     }
 
-    @Scheduled(cron = "0 15 23 * * *", zone = "Asia/Saigon")
+    @Scheduled(cron = "0 0 8 * * *", zone = "Asia/Saigon")
     private void sendTextMessage() {
         logger.info("------------ Start process ---------");
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
